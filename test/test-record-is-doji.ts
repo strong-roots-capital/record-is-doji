@@ -27,7 +27,7 @@ describe('is-doji', () => {
      */
     function makeRecord(bodyToSpreadRatio: number = 8): Record {
 	const Open = getRandomInt(1, 100)
-        let Close
+        let Close: number
         do {
             Close = getRandomInt(1, 100)
         } while (Close == Open)
