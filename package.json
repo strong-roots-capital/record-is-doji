@@ -5,7 +5,9 @@
   "main": "dist/record-is-doji.js",
   "types": "dist/record-is-doji.d.ts",
   "scripts": {
-    "install": "tsc",
+    "prepublishOnly": "npm run compile",
+    "compile": "npm run clean && tsc",
+    "clean": "rm -rf  dist",
     "test": "mocha -r ts-node/register ./test/*.ts",
     "test:watch": "npm test -- --watch",
     "dev": "concurrently \"tsc -w\" \"nodemon -e 'ts json' -x 'npm test || true'\"",
@@ -13,6 +15,9 @@
     "typedoc": "typedoc && cp ./doc/typedoc/README.md .",
     "push-and-publish": "git push origin master && git push origin --tags && npm publish"
   },
+  "files": [
+    "dist/"
+  ],
   "husky": {
     "hooks": {
       "pre-push": "npm run typedoc && git add doc README.md && (git commit -m 'Update documentation' || true)"
@@ -34,13 +39,12 @@
   },
   "homepage": "https://github.com/strong-roots-capital/record-is-doji",
   "dependencies": {
-    "@types/node": "^10.12.18",
     "ow": "^0.10.0",
-    "timeseries-record": "^1.0.0",
-    "typescript": "^3.2.2"
+    "timeseries-record": "^1.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
     "chai": "^4.2.0",
     "concurrently": "^4.1.0",
     "husky": "^1.3.1",
